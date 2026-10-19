@@ -393,3 +393,15 @@ main, header, footer {
 
 
 
+
+/* Make case study images fill the entire box */
+.case-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This makes it fill the box completely */
+  border-radius: 8px;
+  transition: transform 1.2s var(--ease);
+}
+.case:hover .case-visual img {
+  transform: scale(1.05); /* Adds a nice zoom effect on hover */
+}
