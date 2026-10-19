@@ -1,5 +1,5 @@
 ﻿// Replace with your server's public invite code (the part after discord.gg/)
-const INVITE_CODE = 'PASTE-YOUR-INVITE-CODE';
+const INVITE_CODE = 'rABxgQV8dq';
 
 (async function () {
   const el = document.getElementById('memberCount');
@@ -21,3 +21,4 @@ const INVITE_CODE = 'PASTE-YOUR-INVITE-CODE';
     }
   } catch { /* silent — keep static fallback */ }
 })();
+
