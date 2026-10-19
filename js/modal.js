@@ -1,37 +1,12 @@
 ﻿const CASES = {
-  haven: {
-    title: 'Haven — The Study Server',
-    tags: ['Community', 'Discord', '2026'],
-    glyph: 'H',
-    body: [
-      'Haven started as a small Discord server for a handful of friends who could not focus alone. In twelve months it became a 250-person study community with structured focus sessions, body-doubling rooms, and a strict no-noise policy.',
-      'The design challenge: make a text-and-voice app feel like a place. The answer was rhythm — predictable daily rituals, a clean visual identity, and moderation that keeps the tone quiet.'
-    ],
-    stats: [
-      { n: '250+', label: 'members' },
-      { n: '40+', label: 'daily focus hours' },
-      { n: '12mo', label: 'old' }
-    ]
-  },
-  project2: {
-    title: 'Immoidou',
-    tags: ['Real Estate', 'Web', '2026'],
-    glyph: '◆',
-    body: [
-      'Finding a place in Agadir is usually a mess of phone calls and bad listings.',
-      'I built Immoidou to fix that. A clean, fast interface that respects the user and shows the actual properties without the noise.'
-    ],
-    stats: [
-      { n: '—', label: 'placeholder' },
-      { n: '—', label: 'placeholder' },
-      { n: '—', label: 'placeholder' }
-    ]
-  },
   project3: {
     title: 'ConcourSup',
     tags: ['Education', 'Product', '2026'],
     glyph: '✦',
-    body: ['Post-bac students need a way to prepare for the CNCS exam without drowning in scattered resources. ConcourSup brings the prep into one focused site.'],
+    body: [
+      'Post-bac students need a way to prepare for the CNCS exam without drowning in scattered resources. ConcourSup brings the prep into one focused site.',
+      'The goal was to build a platform that helps students study smarter, not harder, by giving them the exact tools they need.'
+    ],
     stats: [{ n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }]
   }
 };
@@ -72,11 +47,9 @@ overlay.querySelector('.modal-close').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-// Hook up modal links via data-modal attribute
 document.querySelectorAll('[data-modal]').forEach((link) => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
     openModal(link.getAttribute('data-modal'));
   });
 });
-
