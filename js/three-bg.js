@@ -1,140 +1,103 @@
 ﻿import * as THREE from 'three';
 
-// 1. Setup Scene
+// 1. Setup Scene, Camera, Renderer
 const canvas = document.querySelector('#webgl');
 const scene = new THREE.Scene();
-// Fog helps it fade into the background elegantly
-scene.fog = new THREE.FogExp2(0x0a0f0c, 0.03);
+scene.fog = new THREE.FogExp2(0x0a0f0c, 0.04); // Blends the edges into the dark bg
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.z = 20;
+camera.position.z = 18;
 
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-// 2. Generate the BOLD "HAVEN" Texture
-const textCanvas = document.createElement('canvas');
-textCanvas.width = 1200;
-textCanvas.height = 300;
-const ctx = textCanvas.getContext('2d');
-ctx.fillStyle = 'black';
-ctx.fillRect(0, 0, 1200, 300);
+// 2. Lighting (This creates the reflections and depth seen in the reference)
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+scene.add(ambientLight);
 
-// Use a universally heavy font
-ctx.font = '900 240px "Arial Black", Impact, sans-serif'; 
-ctx.fillStyle = 'white';
-ctx.textAlign = 'center';
-ctx.textBaseline = 'middle';
-// Draw it centered
-ctx.fillText('HAVEN', 600, 150);
+const dirLight1 = new THREE.DirectionalLight(0xb8ff3c, 2.5); // Lime green light
+dirLight1.position.set(5, 10, 5);
+scene.add(dirLight1);
 
-// Read pixels to find where the text is
-const pixels = ctx.getImageData(0, 0, 1200, 300).data;
-const particles = [];
+const dirLight2 = new THREE.DirectionalLight(0xffd166, 1.5); // Gold light
+dirLight2.position.set(-5, -5, 5);
+scene.add(dirLight2);
 
-// Tighten the sampling step (from 3 to 2) to create a denser, bolder shape
-for (let y = 0; y < 300; y += 2) {
-  for (let x = 0; x < 1200; x += 2) {
-    const index = (y * 1200 + x) * 4;
-    if (pixels[index] > 128) {
-      // Map to 3D space. Center it at (0,0,0)
-      const px = (x - 600) / 35; 
-      const py = -(y - 150) / 35;
-      particles.push({ x: px, y: py, z: 0 });
-    }
-  }
+const pointLight = new THREE.PointLight(0x111814, 100, 50); // Dark green ambient glow
+pointLight.position.set(0, 0, 10);
+scene.add(pointLight);
+
+// 3. Build the 3D "HAVEN" Geometry
+// Instead of particles, we build solid, thick blocks for each letter.
+const group = new THREE.Group();
+
+// A dark, slightly glossy green material matching your site
+const mat = new THREE.MeshStandardMaterial({
+  color: 0x16201a,
+  roughness: 0.2,
+  metalness: 0.8,
+  emissive: 0x0a0f0c,
+});
+
+const thickness = 1.5;
+const gap = 0.6;
+
+function createBlock(w, h, d, x, y) {
+  const geo = new THREE.BoxGeometry(w, h, d);
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.set(x, y, 0);
+  return mesh;
 }
 
-// 3. Create Particle Geometry
-const geometry = new THREE.BufferGeometry();
-const positions = new Float32Array(particles.length * 3);
-const randoms = new Float32Array(particles.length);
+// --- H ---
+let x = -7;
+group.add(createBlock(0.6, 5, thickness, x, 0)); // Left pillar
+group.add(createBlock(0.6, 5, thickness, x + 2.5, 0)); // Right pillar
+group.add(createBlock(2.5, 0.6, thickness, x + 1.25, 0)); // Crossbar
 
-particles.forEach((p, i) => {
-  positions[i * 3] = p.x;
-  positions[i * 3 + 1] = p.y;
-  positions[i * 3 + 2] = p.z;
-  randoms[i] = Math.random();
-});
+// --- A ---
+x = -2.5;
+group.add(createBlock(0.6, 5, thickness, x, 0)); // Left pillar
+group.add(createBlock(0.6, 5, thickness, x + 2.5, 0)); // Right pillar
+group.add(createBlock(2.5, 0.6, thickness, x + 1.25, 0)); // Crossbar
 
-geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-geometry.setAttribute('aRandom', new THREE.BufferAttribute(randoms, 1));
+// --- V ---
+x = 2;
+const v1 = createBlock(0.6, 5, thickness, x, 0);
+v1.rotation.z = -0.3; // Angle it
+const v2 = createBlock(0.6, 5, thickness, x + 2, 0);
+v2.rotation.z = 0.3;
+group.add(v1, v2);
 
-// 4. Shader Material (Thicker, brighter)
-const material = new THREE.ShaderMaterial({
-  uniforms: {
-    uTime: { value: 0 },
-    uScroll: { value: 0 },
-    uColor: { value: new THREE.Color('#b8ff3c') },
-  },
-  vertexShader: `
-    uniform float uTime;
-    uniform float uScroll;
-    attribute float aRandom;
-    varying float vRandom;
-    
-    void main() {
-      vRandom = aRandom;
-      vec3 pos = position;
-      
-      // Very subtle breathing effect (keeps it strong, not wavy)
-      pos.z += sin(pos.x * 0.3 + uTime * 1.5) * 0.2;
-      
-      // Scroll gently pushes it back, but doesn't destroy it
-      pos.z -= uScroll * 5.0;
-      
-      vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-      
-      // MAKE PARTICLES BIGGER
-      gl_PointSize = (40.0 / -mvPosition.z) * (0.8 + aRandom * 0.4);
-      gl_Position = projectionMatrix * mvPosition;
-    }
-  `,
-  fragmentShader: `
-    uniform vec3 uColor;
-    varying float vRandom;
-    
-    void main() {
-      vec2 cxy = 2.0 * gl_PointCoord - 1.0;
-      float r = dot(cxy, cxy);
-      if (r > 1.0) discard;
-      
-      // Solid center, soft edge
-      float alpha = smoothstep(1.0, 0.3, r);
-      
-      // Mix the lime green with a bit of gold for depth
-      vec3 color = mix(uColor, vec3(1.0, 0.82, 0.4), vRandom * 0.3);
-      
-      gl_FragColor = vec4(color, alpha * 0.9);
-    }
-  `,
-  transparent: true,
-  depthWrite: false,
-  blending: THREE.AdditiveBlending
-});
+// --- E ---
+x = 6.5;
+group.add(createBlock(0.6, 5, thickness, x, 0)); // Back
+group.add(createBlock(2.2, 0.6, thickness, x + 1.1, 2.2)); // Top
+group.add(createBlock(2.2, 0.6, thickness, x + 1.1, 0)); // Mid
+group.add(createBlock(2.2, 0.6, thickness, x + 1.1, -2.2)); // Bottom
 
-const particleSystem = new THREE.Points(geometry, material);
-scene.add(particleSystem);
+// Center the whole group
+group.position.x = -1.75;
+scene.add(group);
 
-// 5. Mouse Interaction
+// 4. Mouse & Scroll Interaction
 let mouseX = 0;
 let mouseY = 0;
 let targetX = 0;
 let targetY = 0;
+let scrollY = 0;
 
-document.addEventListener('mousemove', (event) => {
-  mouseX = (event.clientX - window.innerWidth / 2) * 0.001;
-  mouseY = (event.clientY - window.innerHeight / 2) * 0.001;
+document.addEventListener('mousemove', (e) => {
+  mouseX = (e.clientX - window.innerWidth / 2) * 0.002;
+  mouseY = (e.clientY - window.innerHeight / 2) * 0.002;
 });
 
-// 6. Scroll Interaction
-let scrollY = 0;
 window.addEventListener('scroll', () => {
   scrollY = window.scrollY / window.innerHeight;
 });
 
-// 7. Animation Loop
+// 5. Animation Loop
 const clock = new THREE.Clock();
 
 function animate() {
@@ -142,35 +105,33 @@ function animate() {
   
   const time = clock.getElapsedTime();
   
-  material.uniforms.uTime.value = time;
-  material.uniforms.uScroll.value = scrollY;
-  
-  // Smooth mouse follow (subtle tilt)
+  // Smooth mouse follow
   targetX += (mouseX - targetX) * 0.05;
   targetY += (mouseY - targetY) * 0.05;
   
-  // LOCK TO CENTER: Only rotate, never translate wildly
-  particleSystem.rotation.y = time * 0.15 + targetX + (scrollY * 0.5);
-  particleSystem.rotation.x = targetY;
+  // THE EFFECT: 
+  // It rotates wildly as you scroll, and tilts slightly with the mouse.
+  // Scroll down -> spins right and moves into the background.
+  group.rotation.y = targetX + (scrollY * Math.PI * 2); 
+  group.rotation.x = targetY + (scrollY * 0.5);
+  group.rotation.z = Math.sin(time * 0.5) * 0.05; // Very subtle idle floating
   
-  // Keep it perfectly centered vertically, only move slightly back on scroll
-  particleSystem.position.y = 0; 
-  particleSystem.position.z = -scrollY * 2;
+  // Move it back and down slightly on scroll to feel like it's flying away
+  group.position.z = -scrollY * 15;
+  group.position.y = -scrollY * 5;
+  
+  // Idle breathing animation
+  group.scale.setScalar(1 + Math.sin(time * 2) * 0.02);
   
   renderer.render(scene, camera);
 }
 
-// 8. Resize & Load
+// 6. Resize & Load
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Fade in when ready
-document.fonts.ready.then(() => {
-  animate();
-  setTimeout(() => {
-    canvas.classList.add('ready');
-  }, 100);
-});
+animate();
+canvas.classList.add('ready');
