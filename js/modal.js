@@ -72,16 +72,10 @@ overlay.querySelector('.modal-close').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-// Hook up the existing "View case study" links
-document.querySelectorAll('.case').forEach((el, i) => {
-  const link = el.querySelector('.case-link');
-  const id = i === 0 ? 'haven' : i === 1 ? 'project2' : 'project3';
-  if (link) {
-    link.addEventListener('click', (e) => {
-      if (link.getAttribute('href') === '#') {
-        e.preventDefault();
-        openModal(id);
-      }
-    });
-  }
+// Hook up modal links via data-modal attribute
+document.querySelectorAll('[data-modal]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    openModal(link.getAttribute('data-modal'));
+  });
 });
