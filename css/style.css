@@ -383,19 +383,13 @@ main, header, footer {
 }
 
 
-/* ---------- CINEMATIC HERO BACKGROUND ---------- */
-.hero {
-  position: relative;
-  /* The background image with a dark gradient fade at the bottom */
-  background: linear-gradient(to bottom, rgba(8,8,8,0.2) 0%, rgba(8,8,8,0.95) 100%), 
-              url('./assets/haven-bg.jpg') center top / cover no-repeat;
-  background-attachment: fixed;
-}
+
 
 /* Hide the 3D canvas since we are using the image now */
 #webgl {
-  display: none !important;
+  
 }
+
 
 
 

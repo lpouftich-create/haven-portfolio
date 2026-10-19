@@ -43,7 +43,7 @@ scene.add(light2);
 // 3. THE 3D TEXT
 const group = new THREE.Group();
 const mat = new THREE.MeshStandardMaterial({
-  color: 0x16201a,       // Darker base color
+  color: 0xD4AF37,       // Darker base color
   roughness: 0.4,        
   metalness: 0.8,        
   emissive: 0xB8860B,
@@ -108,4 +108,5 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
 
