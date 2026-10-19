@@ -32,11 +32,11 @@ composer.addPass(bloomPass);
 const ambient = new THREE.AmbientLight(0xffffff, 0.5); // Dimmer ambient
 scene.add(ambient);
 
-const light1 = new THREE.DirectionalLight(0xb8ff3c, 3); // Dimmer lime
+const light1 = new THREE.DirectionalLight(0xD4AF37, 3); // Dimmer lime
 light1.position.set(-10, 10, 10);
 scene.add(light1);
 
-const light2 = new THREE.DirectionalLight(0xffd166, 2); // Dimmer gold
+const light2 = new THREE.DirectionalLight(0xF3E5AB, 2); // Dimmer gold
 light2.position.set(10, -10, 10);
 scene.add(light2);
 
@@ -46,7 +46,7 @@ const mat = new THREE.MeshStandardMaterial({
   color: 0x16201a,       // Darker base color
   roughness: 0.4,        
   metalness: 0.8,        
-  emissive: 0x88cc00,
+  emissive: 0xB8860B,
   emissiveIntensity: 0.3 // Much lower glow
 });
 
@@ -108,3 +108,4 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
