@@ -114,3 +114,13 @@ if (contactForm) {
     }
   });
 }
+
+// Fade out the 3D background when scrolling past the hero
+const webglCanvas = document.getElementById('webgl');
+window.addEventListener('scroll', () => {
+  const heroHeight = window.innerHeight;
+  const opacity = Math.max(0, 1 - (window.scrollY / (heroHeight * 0.8)));
+  if (webglCanvas) {
+    webglCanvas.style.opacity = opacity;
+  }
+});
