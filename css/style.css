@@ -360,3 +360,19 @@ main { position: relative; z-index: 1; }
   font-size: 13px; color: var(--lime);
   min-height: 20px;
 }
+
+/* ---------- THREE.JS CANVAS ---------- */
+#webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Puts it behind everything */
+  pointer-events: none; /* Lets you click through it */
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+#webgl.ready {
+  opacity: 1;
+}
