@@ -1,25 +1,25 @@
 ﻿const CASES = {
   haven: {
-    title: 'Haven — the study server',
+    title: 'Haven — The Study Server',
     tags: ['Community', 'Discord', '2026'],
     glyph: 'H',
     body: [
-      'Haven started as a small Discord server for a handful of friends who could not focus alone. In twelve months it became a 1,200-person study community with structured focus sessions, body-doubling rooms, and a strict no-noise policy.',
+      'Haven started as a small Discord server for a handful of friends who could not focus alone. In twelve months it became a 250-person study community with structured focus sessions, body-doubling rooms, and a strict no-noise policy.',
       'The design challenge: make a text-and-voice app feel like a place. The answer was rhythm — predictable daily rituals, a clean visual identity, and moderation that keeps the tone quiet.'
     ],
     stats: [
-      { n: '1,200+', label: 'members' },
+      { n: '250+', label: 'members' },
       { n: '40+', label: 'daily focus hours' },
       { n: '12mo', label: 'old' }
     ]
   },
   project2: {
-    title: 'Your second project',
-    tags: ['Product', '2026'],
+    title: 'Immoidou',
+    tags: ['Real Estate', 'Web', '2026'],
     glyph: '◆',
     body: [
-      'Describe the problem. What was broken or missing?',
-      'Describe the solution and the specific decision that made it work.'
+      'Finding a place in Agadir is usually a mess of phone calls and bad listings.',
+      'I built Immoidou to fix that. A clean, fast interface that respects the user and shows the actual properties without the noise.'
     ],
     stats: [
       { n: '—', label: 'placeholder' },
@@ -28,10 +28,10 @@
     ]
   },
   project3: {
-    title: 'Your third project',
-    tags: ['Client work', '2026'],
+    title: 'ConcourSup',
+    tags: ['Education', 'Product', '2026'],
     glyph: '✦',
-    body: ['Same structure. Be specific.'],
+    body: ['Post-bac students need a way to prepare for the CNCS exam without drowning in scattered resources. ConcourSup brings the prep into one focused site.'],
     stats: [{ n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }]
   }
 };
@@ -79,3 +79,4 @@ document.querySelectorAll('[data-modal]').forEach((link) => {
     openModal(link.getAttribute('data-modal'));
   });
 });
+
