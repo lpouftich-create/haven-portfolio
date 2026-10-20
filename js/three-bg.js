@@ -20,9 +20,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 const renderScene = new RenderPass(scene, camera);
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  2.5,  // strength (MASSIVE NEON GLOW)
-  0.8,  // radius (how far it spreads)
-  0.1   // threshold (anything bright glows)
+  0.8,  // strength (MASSIVE NEON GLOW)
+  0.5,  // radius (how far it spreads)
+  0.6   // threshold (anything bright glows)
 );
 const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
@@ -94,10 +94,10 @@ function updateTheme() {
     scene.fog.color.setHex(0xFAFAF7);
   } else {
     // Dark Mode: Pure Neon Gold
-    mat.color.setHex(0xffd700);
-    mat.emissive.setHex(0xffd700);
-    mat.emissiveIntensity = 2.0;
-    bloomPass.strength = 2.5;
+    mat.color.setHex(0x664400);
+    mat.emissive.setHex(0xD4AF37);
+    mat.emissiveIntensity = 0.5;
+    bloomPass.strength = 0.8;
     scene.fog.color.setHex(0x080808);
   }
 }
@@ -132,3 +132,4 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
