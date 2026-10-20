@@ -83,7 +83,7 @@ window.addEventListener('scroll', () => {
 
 // Theme Logic
 function updateTheme() {
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light'; if (isLight) { canvas.style.display = 'none'; } else { canvas.style.display = 'block'; }
   
   if (isLight) {
     // Light Mode: Gold text, white fog, transparent bg
@@ -134,3 +134,4 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+

@@ -608,3 +608,37 @@ body { transition: background-color 0.3s, color 0.3s; }
   mix-blend-mode: normal !important;
   opacity: 0.6 !important;
 }
+
+/* ---------- CLEAN LIGHT THEME ---------- */
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --surface: #FAFAFA;
+  --ink: #000000;
+  --muted: #555555;
+  --line: #E5E5E5;
+}
+
+[data-theme="light"] #webgl {
+  display: none !important; /* Hide the 3D canvas completely in light mode */
+}
+
+[data-theme="light"] body {
+  background-color: var(--bg) !important;
+  color: var(--ink) !important;
+}
+
+[data-theme="light"] .nav {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+[data-theme="light"] .hero-title .accent {
+  color: #B8860B !important; /* Darker gold for contrast on white */
+}
+
+[data-theme="light"] .discord {
+  background: none !important;
+  background-color: #F9F9F9 !important;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
