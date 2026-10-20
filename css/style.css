@@ -441,3 +441,44 @@ main, header, footer {
 .service-list li::before {
   content: '✦'; color: var(--gold); font-size: 10px;
 }
+
+/* ---------- NOTES / BLOG SECTION ---------- */
+.notes {
+  max-width: var(--max); margin: 0 auto;
+  padding: 120px 40px;
+  border-top: 1px solid var(--line);
+}
+.notes-grid {
+  display: grid; grid-template-columns: 1fr; gap: 24px;
+}
+@media (min-width: 800px) {
+  .notes-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+}
+.note-card {
+  display: flex; flex-direction: column;
+  padding: 32px; border: 1px solid var(--line);
+  border-radius: 12px; background: transparent;
+  transition: background 0.3s, border-color 0.3s;
+}
+.note-card:hover {
+  background: var(--surface);
+  border-color: var(--gold);
+}
+.note-meta {
+  display: flex; justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--muted); margin-bottom: 20px;
+}
+.note-card h3 {
+  font-family: 'Fraunces', serif; font-weight: 400;
+  font-size: 22px; line-height: 1.2; margin-bottom: 12px;
+}
+.note-card p {
+  color: var(--muted); font-size: 15px; line-height: 1.6;
+  margin-bottom: 24px; flex-grow: 1;
+}
+.note-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--gold); transition: color 0.2s;
+}
