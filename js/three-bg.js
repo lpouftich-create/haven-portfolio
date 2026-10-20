@@ -36,7 +36,7 @@ const light2 = new THREE.DirectionalLight(0xFFD700, 2);
 light2.position.set(10, -10, 10);
 scene.add(light2);
 
-const group = new THREE.Group();
+const group = new THREE.Group(); group.position.x = 6; // Shift right
 const mat = new THREE.MeshStandardMaterial({
   color: 0xD4AF37, roughness: 0.2, metalness: 0.8, emissive: 0xFFD700, emissiveIntensity: 0.6
 });
@@ -88,4 +88,5 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
 
