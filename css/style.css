@@ -174,16 +174,23 @@ main { position: relative; z-index: 1; }
   overflow: hidden; padding: 32px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  display: flex;
+  white-space: nowrap;
 }
 .marquee-track {
-  display: inline-block; white-space: nowrap;
+  display: flex;
+  animation: scroll 20s linear infinite;
+}
+.marquee-track span {
   font-family: 'Fraunces', serif; font-style: italic;
   font-size: clamp(24px, 3vw, 42px);
   color: var(--muted);
-  animation: scroll 30s linear infinite;
+  padding-right: 24px;
 }
-.marquee-track span { padding-right: 24px; }
-@keyframes scroll { to { transform: translateX(-50%); } }
+@keyframes scroll { 
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } 
+} }
 
 .section-head { margin-bottom: 64px; }
 .kicker {
@@ -482,4 +489,5 @@ main, header, footer {
   font-family: 'JetBrains Mono', monospace;
   font-size: 12px; color: var(--gold); transition: color 0.2s;
 }
+
 
