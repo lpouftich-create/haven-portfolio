@@ -8,6 +8,36 @@
       'The goal was to build a platform that helps students study smarter, not harder, by giving them the exact tools they need.'
     ],
     stats: [{ n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }]
+  },
+  note1: {
+    title: 'Architecting a real-time real estate platform',
+    tags: ['Engineering', '3 min read'],
+    glyph: '🏗',
+    body: [
+      'Building Immoidou required a database architecture that could handle rapid read/write operations without bottlenecking. I implemented a custom caching layer and optimized the frontend routing to ensure sub-second page loads.',
+      'The search functionality was built using indexed queries, allowing users to filter through thousands of property listings instantly. The frontend relies on server-side rendering to guarantee SEO performance and initial load speed.'
+    ],
+    stats: [{ n: '0.8s', label: 'Load Time' }, { n: '100', label: 'Lighthouse Score' }, { n: '99.9%', label: 'Uptime' }]
+  },
+  note2: {
+    title: 'Scaling community infrastructure',
+    tags: ['Community', '5 min read'],
+    glyph: '⚙️',
+    body: [
+      'A 250+ member Discord server doesn\'t run itself. I designed an automated infrastructure that handles onboarding, role assignment, and moderation to maintain a highly focused environment.',
+      'The engagement loops are built around structured focus sprints rather than constant chatting. By utilizing custom bot logic to manage voice channel states and study timers, the server maintains a consistent daily active user count without requiring constant manual oversight.'
+    ],
+    stats: [{ n: '250+', label: 'Members' }, { n: '24/7', label: 'Automation' }, { n: '0', label: 'Spam' }]
+  },
+  note3: {
+    title: 'High-performance web rendering',
+    tags: ['Design', '2 min read'],
+    glyph: '💻',
+    body: [
+      'WebGL and Three.js can easily destroy a website\'s performance if not implemented correctly. I built the 3D background on this site using optimized geometry and frame-limiting to ensure it doesn\'t drain the user\'s battery.',
+      'By dynamically scaling the render resolution based on the device pixel ratio and pausing the animation loop when the canvas is out of view, I maintained a flawless 60fps experience while keeping the main thread free for UI interactions.'
+    ],
+    stats: [{ n: '60fps', label: 'Frame Rate' }, { n: '3D', label: 'Canvas' }, { n: '0', label: 'Layout Shifts' }]
   }
 };
 
@@ -47,9 +77,10 @@ overlay.querySelector('.modal-close').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-document.querySelectorAll('[data-modal]').forEach((link) => {
+document.querySelectorAll('[data-modal], [data-note]').forEach((link) => {
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    openModal(link.getAttribute('data-modal'));
+    const id = link.getAttribute('data-modal') || link.getAttribute('data-note');
+    openModal(id);
   });
 });
