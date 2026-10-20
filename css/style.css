@@ -201,7 +201,9 @@ main { position: relative; z-index: 1; }
 .section-head h2, .about h2, .discord h2, .contact h2 {
   font-family: 'Fraunces', serif; font-weight: 400;
   font-size: clamp(36px, 5.5vw, 72px);
-  line-height: 1.02; letter-spacing: -0.025em;
+  line-height: 1.1; 
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
 }
 
 .work {
@@ -411,10 +413,20 @@ main, header, footer {
   border-top: 1px solid var(--line);
 }
 .services-grid {
-  display: grid; grid-template-columns: 1fr; gap: 24px;
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  margin-top: 40px;
 }
 @media (min-width: 800px) {
   .services-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+}
+@media (min-width: 800px) {
+  .services-grid {
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  margin-top: 40px;
+}
+@media (min-width: 800px) {
+  .services-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+}
 }
 .service-card {
   background: var(--surface);
@@ -456,10 +468,20 @@ main, header, footer {
   border-top: 1px solid var(--line);
 }
 .notes-grid {
-  display: grid; grid-template-columns: 1fr; gap: 24px;
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  margin-top: 40px;
 }
 @media (min-width: 800px) {
   .notes-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+}
+@media (min-width: 800px) {
+  .notes-grid {
+  display: grid; grid-template-columns: 1fr; gap: 32px;
+  margin-top: 40px;
+}
+@media (min-width: 800px) {
+  .notes-grid { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+}
 }
 .note-card {
   display: flex; flex-direction: column;
@@ -526,9 +548,10 @@ main, header, footer {
 }
 
 [data-theme="light"] .grain { opacity: 0.03; }
-[data-theme="light"] #webgl { opacity: 0.2; mix-blend-mode: multiply; } /* Make 3D text dark in light mode */
+[data-theme="light"] #webgl { opacity: 0; display: none; } /* Make 3D text dark in light mode */
 
 [data-theme="light"] .case-visual-inner, [data-theme="light"] .modal-hero {
   background: var(--surface-2) !important;
 }
 body { transition: background-color 0.3s, color 0.3s; }
+
