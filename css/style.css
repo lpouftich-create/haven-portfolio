@@ -384,7 +384,13 @@ main { position: relative; z-index: 1; }
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.1s linear;
-  mix-blend-mode: screen;
+  mix-blend-mode: multiply; /* Makes white parts transparent in light mode */
+}
+#webgl.ready {
+  opacity: 1;
+}
+[data-theme="dark"] #webgl {
+  mix-blend-mode: screen; /* Makes black parts transparent in dark mode */
 }
 #webgl.ready {
   opacity: 1;
@@ -548,12 +554,30 @@ main, header, footer {
 }
 
 [data-theme="light"] .grain { opacity: 0.03; }
-[data-theme="light"] #webgl { opacity: 1; display: block; mix-blend-mode: normal; } /* Make 3D text dark in light mode */
+[data-theme="light"] #webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s linear;
+  mix-blend-mode: multiply; /* Makes white parts transparent in light mode */
+}
+#webgl.ready {
+  opacity: 1;
+}
+[data-theme="dark"] #webgl {
+  mix-blend-mode: screen; /* Makes black parts transparent in dark mode */
+} /* Make 3D text dark in light mode */
 
 [data-theme="light"] .case-visual-inner, [data-theme="light"] .modal-hero {
   background: var(--surface-2) !important;
 }
 body { transition: background-color 0.3s, color 0.3s; }
+
 
 
 
