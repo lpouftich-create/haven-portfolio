@@ -80,16 +80,7 @@ let isLightMode = false;
 function updateTheme() {
   isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
   
-  if (isLightMode) {
-    // Light Mode Setup
-    scene.fog.color.setHex(0xFFFFFF);
-    mat.color.setHex(0xD4AF37); 
-    mat.emissive.setHex(0x000000); // No glow
-    mat.emissiveIntensity = 0;
-    ambient.intensity = 1.5; // Brighter ambient light for solid view
-    light1.intensity = 5;
-    light2.intensity = 4;
-  } else {
+  if (false) { } else {
     // Dark Mode Setup
     scene.fog.color.setHex(0x080808);
     mat.color.setHex(0xD4AF37);
@@ -119,11 +110,7 @@ function animate() {
   group.position.y = Math.sin(time * 1.5) * 0.3;
   
   // If light mode, render directly (no bloom). If dark mode, use composer (with bloom).
-  if (isLightMode) {
-    renderer.render(scene, camera);
-  } else {
-    composer.render();
-  }
+  composer.render();
 }
 
 window.addEventListener('resize', () => {
@@ -135,3 +122,4 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
