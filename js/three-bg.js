@@ -7,60 +7,55 @@ import { UnrealBloomPass } from 'https://unpkg.com/three@0.160.0/examples/jsm/po
 
 const canvas = document.querySelector('#webgl');
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x0a0f0c, 0.03); 
+scene.fog = new THREE.FogExp2(0x0a0f0c, 0.02); 
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-camera.position.z = 40; // Moved further back
+camera.position.z = 35;
 
 const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-// 1. SOFTER BLOOM
 const renderScene = new RenderPass(scene, camera);
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.8,  // strength (lowered from 1.5)
-  0.3,  // radius
-  0.9   // threshold (higher = less glow)
+  1.2, 0.4, 0.85
 );
 const composer = new EffectComposer(renderer);
 composer.addPass(renderScene);
 composer.addPass(bloomPass);
 
-// 2. LIGHTING
-const ambient = new THREE.AmbientLight(0xffffff, 0.5); // Dimmer ambient
+const ambient = new THREE.AmbientLight(0xffffff, 1); 
 scene.add(ambient);
 
-const light1 = new THREE.DirectionalLight(0xD4AF37, 3); // Dimmer lime
+const light1 = new THREE.DirectionalLight(0xD4AF37, 8);
 light1.position.set(-10, 10, 10);
 scene.add(light1);
 
-const light2 = new THREE.DirectionalLight(0xF3E5AB, 2); // Dimmer gold
+const light2 = new THREE.DirectionalLight(0xFFD700, 5);
 light2.position.set(10, -10, 10);
 scene.add(light2);
 
-// 3. THE 3D TEXT
 const group = new THREE.Group();
 const mat = new THREE.MeshStandardMaterial({
-  color: 0xD4AF37,       // Darker base color
-  roughness: 0.4,        
+  color: 0xD4AF37,
+  roughness: 0.2,        
   metalness: 0.8,        
-  emissive: 0xB8860B,
-  emissiveIntensity: 0.3 // Much lower glow
+  emissive: 0xFFD700,
+  emissiveIntensity: 1.0
 });
 
 const loader = new FontLoader();
 loader.load('https://unpkg.com/three@0.160.0/examples/fonts/helvetiker_bold.typeface.json', function (font) {
   const geometry = new TextGeometry('HAVEN', {
     font: font,
-    size: 4.5, // Much smaller text
-    height: 1, 
+    size: 7,
+    height: 1.5, 
     curveSegments: 12,
     bevelEnabled: true,
-    bevelThickness: 0.1,
-    bevelSize: 0.05,
-    bevelSegments: 3
+    bevelThickness: 0.2,
+    bevelSize: 0.1,
+    bevelSegments: 5
   });
   geometry.center();
   const textMesh = new THREE.Mesh(geometry, mat);
@@ -68,7 +63,6 @@ loader.load('https://unpkg.com/three@0.160.0/examples/fonts/helvetiker_bold.type
   scene.add(group);
 });
 
-// 4. ANIMATION & SCROLL FADE
 let mouseX = 0, mouseY = 0, targetX = 0, targetY = 0;
 document.addEventListener('mousemove', (e) => {
   mouseX = (e.clientX - window.innerWidth / 2) * 0.002;
@@ -78,13 +72,42 @@ document.addEventListener('mousemove', (e) => {
 let scrollY = 0;
 window.addEventListener('scroll', () => {
   scrollY = window.scrollY;
-  // Fade out the 3D canvas as you scroll down
   const opacity = Math.max(0, 1 - (scrollY / (window.innerHeight * 0.5)));
   canvas.style.opacity = opacity;
 });
 
-const clock = new THREE.Clock();
+// Theme switching logic for 3D colors
+function updateTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  
+  if (isLight) {
+    // Light Mode: Silver / Metallic Grey
+    mat.color.setHex(0xCCCCCC); 
+    mat.emissive.setHex(0x333333); 
+    light1.color.setHex(0xFFFFFF);
+    light2.color.setHex(0xCCCCCC);
+    scene.fog.color.setHex(0xFAFAF7);
+    bloomPass.strength = 0.5;
+  } else {
+    // Dark Mode: Gold
+    mat.color.setHex(0xD4AF37);
+    mat.emissive.setHex(0xFFD700);
+    light1.color.setHex(0xD4AF37);
+    light2.color.setHex(0xFFD700);
+    scene.fog.color.setHex(0x0a0f0c);
+    bloomPass.strength = 1.2;
+  }
+}
 
+// Listen for theme button clicks
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  setTimeout(updateTheme, 10);
+});
+
+// Initial setup
+setTimeout(updateTheme, 100);
+
+const clock = new THREE.Clock();
 function animate() {
   requestAnimationFrame(animate);
   const time = clock.getElapsedTime();
@@ -94,7 +117,7 @@ function animate() {
   
   group.rotation.y = targetX;
   group.rotation.x = targetY;
-  group.position.y = Math.sin(time * 1.5) * 0.3;
+  group.position.y = Math.sin(time * 1.5) * 0.5;
   
   composer.render();
 }
@@ -108,5 +131,3 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
-
-

@@ -548,7 +548,7 @@ main, header, footer {
 }
 
 [data-theme="light"] .grain { opacity: 0.03; }
-[data-theme="light"] #webgl { opacity: 0; display: none; } /* Make 3D text dark in light mode */
+[data-theme="light"] #webgl { opacity: 1; display: block; mix-blend-mode: normal; } /* Make 3D text dark in light mode */
 
 [data-theme="light"] .case-visual-inner, [data-theme="light"] .modal-hero {
   background: var(--surface-2) !important;
@@ -556,26 +556,5 @@ main, header, footer {
 body { transition: background-color 0.3s, color 0.3s; }
 
 
-/* ---------- LIGHT MODE HERO WATERMARK ---------- */
-.hero-watermark {
-  display: none; /* Hidden by default (dark mode uses 3D) */
-}
 
-[data-theme="light"] .hero-watermark {
-  display: block;
-  position: absolute;
-  top: 50%;
-  right: -5%;
-  transform: translateY(-50%);
-  font-family: 'Fraunces', serif;
-  font-size: clamp(120px, 20vw, 280px);
-  font-weight: 500;
-  color: rgba(212, 175, 55, 0.08); /* Subtle Gold */
-  z-index: -1;
-  pointer-events: none;
-  white-space: nowrap;
-  letter-spacing: -0.04em;
-}
 
-/* Ensure the hero section is positioned for the watermark */
-.hero { position: relative; }
