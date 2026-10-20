@@ -79,7 +79,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal
 
 document.querySelectorAll('[data-modal], [data-note]').forEach((link) => {
   link.addEventListener('click', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // THIS PREVENTS THE JUMP TO TOP
     const id = link.getAttribute('data-modal') || link.getAttribute('data-note');
     openModal(id);
   });
