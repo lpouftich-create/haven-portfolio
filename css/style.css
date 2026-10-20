@@ -491,3 +491,43 @@ main, header, footer {
 }
 
 
+
+/* ---------- THEME TOGGLE & LIGHT THEME ---------- */
+.theme-toggle {
+  background: none; border: none; color: var(--muted);
+  cursor: none; display: flex; align-items: center; justify-content: center;
+  padding: 8px; border-radius: 50%; transition: color 0.2s, background 0.2s;
+}
+.theme-toggle:hover { color: var(--gold); background: var(--surface-2); }
+
+[data-theme="light"] {
+  --bg: #FAFAF7;          /* Ivory white */
+  --surface: #FFFFFF;
+  --surface-2: #F0F0EB;
+  --ink: #111111;         /* Deep black */
+  --muted: #666666;
+  --gold: #B8860B;        /* Darker gold for contrast on white */
+  --gold-light: #DAA520;
+  --line: #E0E0DA;
+}
+
+[data-theme="light"] .nav {
+  background: rgba(250, 250, 247, 0.8);
+}
+
+[data-theme="light"] .hero-title .accent {
+  color: var(--gold);
+}
+
+[data-theme="light"] .discord {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(184,134,11,0.1), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(218,165,32,0.05), transparent 50%);
+}
+
+[data-theme="light"] .grain { opacity: 0.03; }
+[data-theme="light"] #webgl { opacity: 0.2; mix-blend-mode: multiply; } /* Make 3D text dark in light mode */
+
+[data-theme="light"] .case-visual-inner, [data-theme="light"] .modal-hero {
+  background: var(--surface-2) !important;
+}
