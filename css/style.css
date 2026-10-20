@@ -531,3 +531,4 @@ main, header, footer {
 [data-theme="light"] .case-visual-inner, [data-theme="light"] .modal-hero {
   background: var(--surface-2) !important;
 }
+body { transition: background-color 0.3s, color 0.3s; }

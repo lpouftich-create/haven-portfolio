@@ -27,7 +27,11 @@
   <nav class="nav-links">
     <a href="#work" data-magnetic>Work</a>
     <a href="#about" data-magnetic>About</a>
-    <a href="#discord" data-magnetic class="nav-cta">Join Discord ↗</a>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+      <svg id="icon-sun" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg id="icon-moon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <a href="https://discord.gg/rABxgQV8dq" target="_blank" rel="noopener" data-magnetic class="nav-cta">Join Discord ↗</a>
   </nav>
 </header>
 
@@ -51,7 +55,7 @@
     </p>
 
     <div class="hero-cta reveal">
-      <a href="#discord" class="btn btn-primary" data-magnetic>
+      <a href="https://discord.gg/rABxgQV8dq" target="_blank" rel="noopener" class="btn btn-primary" data-magnetic>
         <span>Join Haven</span>
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -65,7 +69,7 @@
     </div>
   </section>
 
-    <section class="marquee" aria-hidden="true">
+  <section class="marquee" aria-hidden="true">
     <div class="marquee-track">
       <span>✦ Focus ✦ Build ✦ Ship ✦ Study ✦ Design ✦ Code ✦</span>
       <span>✦ Focus ✦ Build ✦ Ship ✦ Study ✦ Design ✦ Code ✦</span>
@@ -74,7 +78,7 @@
     </div>
   </section>
 
-      <section id="services" class="services">
+  <section id="services" class="services">
     <div class="section-head reveal">
       <span class="kicker">— Services</span>
       <h2>What I can<br>do for you.</h2>
@@ -113,7 +117,7 @@
     </div>
   </section>
 
-<section id="work" class="work">
+  <section id="work" class="work">
     <div class="section-head reveal">
       <span class="kicker">— Selected work</span>
       <h2>Things I've built.</h2>
@@ -122,21 +126,21 @@
     <article class="case reveal" data-tilt>
       <div class="case-visual" data-parallax>
         <div class="case-visual-inner" style="background: radial-gradient(circle at center, #1c1c1c 0%, #080808 100%); border: 1px solid rgba(212, 175, 55, 0.2);">
-          <img src="./assets/logo.png" alt="Haven Server">
+          <img src="./assets/haven-bg.jpg" alt="Haven Server" style="object-fit: contain;">
         </div>
       </div>
       <div class="case-body">
         <div class="case-tags"><span>Community</span><span>2026</span></div>
         <h3>Haven — The Study Server</h3>
         <p>A Discord community built around focus sessions, study sprints, and zero toxicity. 250+ members, daily focus hours.</p>
-        <a href="#discord" class="case-link" data-magnetic>Join the server <span>↗</span></a>
+        <a href="https://discord.gg/rABxgQV8dq" target="_blank" rel="noopener" class="case-link" data-magnetic>Join the server <span>↗</span></a>
       </div>
     </article>
 
     <article class="case case-reverse reveal" data-tilt>
       <div class="case-visual" data-parallax>
         <div class="case-visual-inner" style="background: radial-gradient(circle at center, #1c1c1c 0%, #080808 100%); border: 1px solid rgba(212, 175, 55, 0.2);">
-          <img src="./assets/immoidou.jpeg" alt="Immoidou Logo">
+          <img src="./assets/immoidou.jpeg" alt="Immoidou Logo" style="object-fit: contain;">
         </div>
       </div>
       <div class="case-body">
@@ -150,7 +154,7 @@
     <article class="case reveal" data-tilt>
       <div class="case-visual" data-parallax>
         <div class="case-visual-inner" style="background: radial-gradient(circle at center, #1c1c1c 0%, #080808 100%); border: 1px solid rgba(212, 175, 55, 0.2);">
-          <img src="./assets/concoursup.png" alt="ConcourSup Logo">
+          <img src="./assets/concoursup.png" alt="ConcourSup Logo" style="object-fit: contain;">
         </div>
       </div>
       <div class="case-body">
@@ -162,7 +166,7 @@
     </article>
   </section>
 
-      <section id="notes" class="notes">
+  <section id="notes" class="notes">
     <div class="section-head reveal">
       <span class="kicker">— Notes & Insights</span>
       <h2>Thoughts on<br>building & studying.</h2>
@@ -201,7 +205,7 @@
     </div>
   </section>
 
-<section id="about" class="about">
+  <section id="about" class="about">
     <div class="section-head reveal">
       <span class="kicker">— About</span>
       <h2>Dev by day.<br>Founder by night.</h2>
@@ -234,7 +238,7 @@
     </div>
   </section>
 
-    <section id="contact" class="contact">
+  <section id="contact" class="contact">
     <div class="section-head reveal">
       <span class="kicker">— Contact</span>
       <h2>Got something<br>worth building?</h2>
@@ -272,33 +276,3 @@
 <script src="./js/discord.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
