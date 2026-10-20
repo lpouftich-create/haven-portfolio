@@ -644,11 +644,12 @@ body { transition: background-color 0.3s, color 0.3s; }
 }
 
 
+
 /* ---------- CINEMATIC LIGHT THEME (MIDNIGHT GOLD) ---------- */
 [data-theme="light"] {
   --bg: #0a0f1a;      /* Deep midnight blue */
   --surface: #111827;
-  --ink: #ffffff;
+  --ink: #ffffff;     /* White text */
   --muted: #9ca3af;
   --line: #1f2937;
 }
@@ -665,8 +666,16 @@ body { transition: background-color 0.3s, color 0.3s; }
 
 [data-theme="light"] #webgl {
   display: block !important;
-  mix-blend-mode: screen !important; /* Keeps the bloom effect */
+  mix-blend-mode: screen !important;
   opacity: 1 !important;
+}
+
+[data-theme="light"] .hero-title .line {
+  color: #ffffff !important; /* Forces the main headline to be white */
+}
+
+[data-theme="light"] .hero-lede {
+  color: #9ca3af !important; /* Forces the subtext to be readable */
 }
 
 [data-theme="light"] .hero-title .accent {
