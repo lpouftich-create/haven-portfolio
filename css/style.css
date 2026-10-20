@@ -645,6 +645,7 @@ body { transition: background-color 0.3s, color 0.3s; }
 
 
 
+
 /* ---------- CINEMATIC LIGHT THEME (MIDNIGHT GOLD) ---------- */
 [data-theme="light"] {
   --bg: #0a0f1a;      /* Deep midnight blue */
