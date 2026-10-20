@@ -642,3 +642,33 @@ body { transition: background-color 0.3s, color 0.3s; }
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
+
+/* ---------- FIXED LIGHT THEME ---------- */
+[data-theme="light"] {
+  --bg: #FFFFFF;
+  --surface: #FAFAFA;
+  --ink: #000000;
+  --muted: #555555;
+  --line: #E5E5E5;
+}
+
+[data-theme="light"] body {
+  background-color: var(--bg) !important;
+  color: var(--ink) !important;
+}
+
+[data-theme="light"] .nav {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+/* Ensure the 3D canvas uses normal blending in light mode */
+[data-theme="light"] #webgl {
+  display: block !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
+
+[data-theme="light"] .hero-title .accent {
+  color: #B8860B !important;
+}
