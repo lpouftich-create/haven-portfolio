@@ -646,13 +646,14 @@ body { transition: background-color 0.3s, color 0.3s; }
 
 
 
-/* ---------- CINEMATIC LIGHT THEME (MIDNIGHT GOLD) ---------- */
+
+/* ---------- ACTUAL LIGHT THEME (PURE WHITE) ---------- */
 [data-theme="light"] {
-  --bg: #0a0f1a;      /* Deep midnight blue */
-  --surface: #111827;
-  --ink: #ffffff;     /* White text */
-  --muted: #9ca3af;
-  --line: #1f2937;
+  --bg: #FAFAF7;
+  --surface: #FFFFFF;
+  --ink: #111111;
+  --muted: #555555;
+  --line: #E5E5E5;
 }
 
 [data-theme="light"] body {
@@ -661,24 +662,17 @@ body { transition: background-color 0.3s, color 0.3s; }
 }
 
 [data-theme="light"] .nav {
-  background: rgba(10, 15, 26, 0.8) !important;
+  background: rgba(250, 250, 247, 0.9) !important;
   border-bottom: 1px solid var(--line) !important;
 }
 
+/* Make the 3D canvas blend nicely into white */
 [data-theme="light"] #webgl {
   display: block !important;
-  mix-blend-mode: screen !important;
+  mix-blend-mode: multiply !important; 
   opacity: 1 !important;
 }
 
-[data-theme="light"] .hero-title .line {
-  color: #ffffff !important; /* Forces the main headline to be white */
-}
-
-[data-theme="light"] .hero-lede {
-  color: #9ca3af !important; /* Forces the subtext to be readable */
-}
-
 [data-theme="light"] .hero-title .accent {
-  color: #FFD700 !important;
+  color: #B8860B !important; /* Dark gold for white background */
 }
