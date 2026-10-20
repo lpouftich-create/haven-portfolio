@@ -583,3 +583,28 @@ body { transition: background-color 0.3s, color 0.3s; }
 
 
 
+
+/* FORCE LIGHT MODE BACKGROUND AND COLORS */
+[data-theme="light"] body {
+  background-color: #FAFAF7 !important;
+  color: #111111 !important;
+}
+
+[data-theme="light"] .nav {
+  background: rgba(250, 250, 247, 0.85) !important;
+  border-bottom: 1px solid #E0E0DA !important;
+}
+
+[data-theme="light"] .hero-title .line {
+  color: #111111 !important;
+}
+
+[data-theme="light"] .hero-lede {
+  color: #444444 !important;
+}
+
+/* Make sure 3D text is highly visible gold in light mode */
+[data-theme="light"] #webgl {
+  mix-blend-mode: normal !important;
+  opacity: 0.6 !important;
+}
