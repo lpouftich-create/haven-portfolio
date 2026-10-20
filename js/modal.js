@@ -1,14 +1,4 @@
 ﻿const CASES = {
-  project3: {
-    title: 'ConcourSup',
-    tags: ['Education', 'Product', '2026'],
-    glyph: '✦',
-    body: [
-      'Post-bac students need a way to prepare for the CNCS exam without drowning in scattered resources. ConcourSup brings the prep into one focused site.',
-      'The goal was to build a platform that helps students study smarter, not harder, by giving them the exact tools they need.'
-    ],
-    stats: [{ n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }, { n: '—', label: 'placeholder' }]
-  },
   note1: {
     title: 'Architecting a real-time real estate platform',
     tags: ['Engineering', '3 min read'],
@@ -77,9 +67,10 @@ overlay.querySelector('.modal-close').addEventListener('click', closeModal);
 overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
+// Check for both data-modal and data-note
 document.querySelectorAll('[data-modal], [data-note]').forEach((link) => {
   link.addEventListener('click', (e) => {
-    e.preventDefault(); // THIS PREVENTS THE JUMP TO TOP
+    e.preventDefault(); // Stops jumping to top
     const id = link.getAttribute('data-modal') || link.getAttribute('data-note');
     openModal(id);
   });
