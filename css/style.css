@@ -380,17 +380,40 @@ main { position: relative; z-index: 1; }
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: 0; /* Behind the main content */
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.1s linear;
-  mix-blend-mode: multiply; /* Makes white parts transparent in light mode */
+  transition: opacity 1s ease-in-out;
+  mix-blend-mode: screen; /* Makes black transparent */
+}
+#webgl.ready {
+  opacity: 1;
+}
+main, header, footer {
+  position: relative;
+  z-index: 1;
 }
 #webgl.ready {
   opacity: 1;
 }
 [data-theme="dark"] #webgl {
-  mix-blend-mode: screen; /* Makes black parts transparent in dark mode */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0; /* Behind the main content */
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  mix-blend-mode: screen; /* Makes black transparent */
+}
+#webgl.ready {
+  opacity: 1;
+}
+main, header, footer {
+  position: relative;
+  z-index: 1;
 }
 #webgl.ready {
   opacity: 1;
@@ -527,6 +550,7 @@ main, header, footer {
   padding: 8px; border-radius: 50%; transition: color 0.2s, background 0.2s;
 }
 .theme-toggle:hover { color: var(--gold); background: var(--surface-2); }
+
 
 
 

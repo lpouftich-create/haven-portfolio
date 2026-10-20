@@ -88,3 +88,4 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
