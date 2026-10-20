@@ -85,9 +85,9 @@ function updateTheme() {
     bloomPass.strength = 0.2;
     scene.fog.color.setHex(0xFAFAF7);
   } else {
-    mat.color.setHex(0x16201a);
-    mat.emissive.setHex(0xD4AF37);
-    bloomPass.strength = 0.8;
+    mat.color.setHex(0x5c430c);
+    mat.emissive.setHex(0xFFD700);
+    bloomPass.strength = 1.5;
     scene.fog.color.setHex(0x080808);
   }
 }
@@ -124,3 +124,4 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
