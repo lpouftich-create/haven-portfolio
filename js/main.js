@@ -103,30 +103,5 @@ if (contactForm) {
 }
 
 
-// ---- Theme Toggle ----
-const themeToggle = document.getElementById('theme-toggle');
-const iconSun = document.getElementById('icon-sun');
-const iconMoon = document.getElementById('icon-moon');
 
-// Check local storage for saved preference
-const savedTheme = localStorage.getItem('theme') || 'dark';
-document.documentElement.setAttribute('data-theme', savedTheme);
 
-function updateIcon(theme) {
-  if (theme === 'light') {
-    iconSun.style.display = 'block';
-    iconMoon.style.display = 'none';
-  } else {
-    iconSun.style.display = 'none';
-    iconMoon.style.display = 'block';
-  }
-}
-updateIcon(savedTheme);
-
-themeToggle.addEventListener('click', () => {
-  const current = document.documentElement.getAttribute('data-theme');
-  const next = current === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-  updateIcon(next);
-});

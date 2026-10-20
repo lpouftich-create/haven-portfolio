@@ -75,12 +75,9 @@ window.addEventListener('scroll', () => {
 });
 
 // Toggle Logic: Composer for Dark (Neon), Standard Renderer for Light (Solid)
-let isLightMode = false;
 
-function updateTheme() {
-  isLightMode = document.documentElement.getAttribute('data-theme') === 'light';
-  
-  if (false) { } else {
+
+ else {
     // Dark Mode Setup
     scene.fog.color.setHex(0x080808);
     mat.color.setHex(0xD4AF37);
@@ -95,7 +92,7 @@ function updateTheme() {
 document.getElementById('theme-toggle').addEventListener('click', () => {
   setTimeout(updateTheme, 50);
 });
-setTimeout(updateTheme, 100);
+
 
 const clock = new THREE.Clock();
 function animate() {
@@ -122,6 +119,7 @@ window.addEventListener('resize', () => {
 
 animate();
 canvas.classList.add('ready');
+
 
 
 
